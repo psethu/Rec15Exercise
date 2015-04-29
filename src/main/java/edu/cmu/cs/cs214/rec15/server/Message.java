@@ -15,7 +15,6 @@ public class Message implements Serializable {
     private Date timestamp;
     private String sender;
 
-
     // TODO: Make the message also include a timestamp for when the server
     // received the message. To implement, it is necessary to create a fields
     // and the corresponding getter/setters. After that, it is necessary to

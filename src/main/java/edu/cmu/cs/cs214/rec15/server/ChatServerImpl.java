@@ -146,6 +146,9 @@ public class ChatServerImpl extends Thread implements ChatServer {
             try {
                 ObjectInputStream in = new ObjectInputStream(
                         socket.getInputStream());
+                // Get worker name
+                String username = (String) in.readObject();
+                onJoin(username);
                 while (true) {
                     Message msg = (Message) in.readObject();
                     onNewMessage(socket, msg);
@@ -169,6 +172,28 @@ public class ChatServerImpl extends Thread implements ChatServer {
 
         // TODO: Notify all clients when a new client joins the chat server.
         // This probably is made easy with a call back for when a client joins.
+        private void onJoin(String username) {
+            // TODO: Notify all clients that the given user has connected to the
+            // server. HINT: This will look very similar to onNewMessage but
+            // instead of notifying the clients of the new message, it will
+            // notify them of a joining user.
+            // Synchronize because we are iterating through all clients in a
+            // thread
+        	Message msg = new Message("SERVER: "+username+"has joined the server.", username);  
+            synchronized (clients) {
+                for (Socket s : clients) {
+                    try {
+                        ObjectOutputStream out = new ObjectOutputStream(
+                                s.getOutputStream());
+                        out.writeObject(msg);
+                    } catch (IOException e) {
+                        Log.e(TAG, "Unable to send message to client.");
+                    }
+                }
+            }
+        }
+
+>>>>>>> server_toasts
 
         /**
          * Callback for when a message is received by the server. Notifies all

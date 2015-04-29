@@ -16,6 +16,7 @@ public class Message implements Serializable {
     private String sender;
 
 
+
     /**
      * Constructor to create a message
      * 

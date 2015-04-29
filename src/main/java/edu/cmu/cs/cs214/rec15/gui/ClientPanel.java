@@ -196,8 +196,6 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
 		// Usage: dateFormatter.format(date) -> String
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss Z");
 
-		// TODO: Make the server show the timestamp of the received message.
-		// Example output: [15:21:40 -0400] Person: Some message...
 
 		java.util.Date currentDate = new java.util.Date();
 
@@ -226,5 +224,6 @@ public class ClientPanel extends JPanel implements ClientChangeListener {
 				JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
 				options, options[0]);
 	}
+
 
 }

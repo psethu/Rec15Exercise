@@ -177,12 +177,13 @@ public class ChatServerImpl extends Thread implements ChatServer {
             // notify them of a joining user.
             // Synchronize because we are iterating through all clients in a
             // thread
+        	Message msg = new Message("SERVER: "+username+"has joined the server.", username);  
             synchronized (clients) {
                 for (Socket s : clients) {
                     try {
                         ObjectOutputStream out = new ObjectOutputStream(
                                 s.getOutputStream());
-                        out.writeObject(username);
+                        out.writeObject(msg);
                     } catch (IOException e) {
                         Log.e(TAG, "Unable to send message to client.");
                     }
